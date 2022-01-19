@@ -5,10 +5,7 @@ let position = {
   x: 200,
   y: 200,
 };
-document.addEventListener("swiped", function (e) {
-  console.log(e.target); // the element that was swiped
-  console.log(e.detail.dir); // swiped direction
-});
+
 let len = 1;
 let body = [];
 
