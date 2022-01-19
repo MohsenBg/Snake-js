@@ -1,5 +1,3 @@
-//! snake
-let snake = document.getElementById("snake");
 //!speedGame
 let speed = 20;
 let direction = "none";
@@ -9,6 +7,7 @@ let position = {
 };
 
 let len = 1;
+let body = [];
 
 let food_position = {
   x: 0,
@@ -23,7 +22,6 @@ const generateFood = () => {
   let y = Math.ceil(Math.random() * 20) * 20;
   food_position.x = x;
   food_position.y = y;
-  console.log(food_position);
   food.style.top = `${food_position.y}px `;
   food.style.left = `${food_position.x}px `;
 };
@@ -35,6 +33,7 @@ const eatFood = () => {
     document.getElementById(
       "score"
     ).innerHTML = `<div class="number" id="score">${(len - 1) * 10}</div>`;
+    boardGame.innerHTML += `<div class="body" id="body${len - 1}"></div>`;
   }
 };
 //! handler function keyPress
@@ -59,6 +58,7 @@ const handelOnPressKey = (e) => {
       break;
   }
 };
+
 //! event handler for control snake
 window.addEventListener("keydown", handelOnPressKey);
 function waitforme(ms) {
@@ -84,10 +84,23 @@ const move = async () => {
         break;
     }
     gameOver();
-    snake.style.top = `${position.y}px`;
-    snake.style.left = `${position.x}px`;
+
     eatFood();
-    await waitforme(65);
+
+    if (direction !== "none") {
+      body.push({ x: position.x, y: position.y });
+      if (len < body.length) body.shift();
+      for (let i = 0; i < body.length - 1; i++) {
+        document.getElementById(`body${i + 1}`).style.top = `${body[i].y}px`;
+        document.getElementById(`body${i + 1}`).style.left = `${body[i].x}px`;
+        console.log(i);
+      }
+      console.log(body);
+      console.log({ x: position.x, y: position.y });
+      document.getElementById("snake").style.top = `${position.y}px`;
+      document.getElementById("snake").style.left = `${position.x}px`;
+    }
+    await waitforme(100);
   }
 };
 
