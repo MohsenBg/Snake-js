@@ -5,7 +5,10 @@ let position = {
   x: 200,
   y: 200,
 };
-
+document.addEventListener("swiped", function (e) {
+  console.log(e.target); // the element that was swiped
+  console.log(e.detail.dir); // swiped direction
+});
 let len = 1;
 let body = [];
 
@@ -70,20 +73,32 @@ const move = async () => {
   while (true) {
     switch (direction) {
       case "up":
+        document.getElementById(
+          "snake"
+        ).style.webkitTransform = `rotate(${0}deg)`;
         position.y -= speed;
         break;
       case "right":
+        document.getElementById(
+          "snake"
+        ).style.webkitTransform = `rotate(${90}deg)`;
         position.x += speed;
         break;
       case "down":
+        document.getElementById(
+          "snake"
+        ).style.webkitTransform = `rotate(${180}deg)`;
         position.y += speed;
         break;
       case "left":
+        document.getElementById(
+          "snake"
+        ).style.webkitTransform = `rotate(${270}deg)`;
         position.x -= speed;
       default:
         break;
     }
-    gameOver();
+    await gameOver();
 
     eatFood();
 
@@ -93,10 +108,7 @@ const move = async () => {
       for (let i = 0; i < body.length - 1; i++) {
         document.getElementById(`body${i + 1}`).style.top = `${body[i].y}px`;
         document.getElementById(`body${i + 1}`).style.left = `${body[i].x}px`;
-        console.log(i);
       }
-      console.log(body);
-      console.log({ x: position.x, y: position.y });
       document.getElementById("snake").style.top = `${position.y}px`;
       document.getElementById("snake").style.left = `${position.x}px`;
     }
@@ -104,21 +116,34 @@ const move = async () => {
   }
 };
 
-const gameOver = () => {
+const gameOver = async () => {
+  let hitSelf = false;
+  for (let i = 0; i < body.length - 1; i++) {
+    if (position.x === body[i].x && position.y === body[i].y) {
+      hitSelf = true;
+    }
+  }
   if (
     position.x < 0 ||
     position.x > 400 ||
     position.y < 0 ||
-    position.y > 400
+    position.y > 400 ||
+    hitSelf
   ) {
-    position.x = 200;
-    position.y = 200;
-    len = 1;
-    direction = "none";
-    document.getElementById(
-      "score"
-    ).innerHTML = `<div class="number" id="score">${(len - 1) * 10}</div>`;
-    generateFood();
+    // direction = "none";
+    // position.x = 200;
+    // position.y = 200;
+    // for (let i = 0; i < body.length - 1; i++) {
+    //   document.getElementById(`body${i + 1}`).remove();
+    //   body.shift();
+    // }
+    // len = 1;
+
+    // document.getElementById("snake").style.top = `${position.y}px`;
+    // document.getElementById("snake").style.left = `${position.x}px`;
+    // generateFood();
+    await window.alert("game over your score: " + (len - 1) * 10);
+    window.location.reload(true);
   }
 };
 
