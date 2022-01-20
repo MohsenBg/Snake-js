@@ -1,0 +1,5 @@
+export enum Snake_ActionType {
+  DIRECTION = "DIRECTION",
+  HEAD_POSITION = "HEAD_POSITION",
+  BODY_POSITION = "BODY_POSITION",
+}

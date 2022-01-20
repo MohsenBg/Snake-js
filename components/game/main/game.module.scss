@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+  //move it to parent width and height
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url("../../../public/assets/background.png");
+  background-size: contain;
+  background-repeat: repeat;
+  .wallHorizontal {
+    position: absolute;
+    height: 20px;
+    background-image: url("../../../public/assets/wall.jpg");
+    background-size: contain;
+    background-repeat: repeat;
+  }
+  .wallVertical {
+    position: absolute;
+    width: 20px;
+    background-image: url("../../../public/assets/wall.jpg");
+    background-size: contain;
+    background-repeat: repeat;
+  }
+  .board_game_container {
+    position: relative;
+    .board_game {
+      background-image: url("../../../public/assets/boardGame.png");
+      background-size: contain;
+      background-repeat: repeat;
+      // box-shadow: 0 0 1px 20px black;
+    }
+  }
+}

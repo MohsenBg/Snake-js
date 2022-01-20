@@ -61,7 +61,7 @@ const handelOnPressKey = (e) => {
 
 //! event handler for control snake
 window.addEventListener("keydown", handelOnPressKey);
-function waitforme(ms) {
+function daleyLoop(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
@@ -109,7 +109,8 @@ const move = async () => {
       document.getElementById("snake").style.top = `${position.y}px`;
       document.getElementById("snake").style.left = `${position.x}px`;
     }
-    await waitforme(100);
+    ``;
+    await daleyLoop(100);
   }
 };
 
