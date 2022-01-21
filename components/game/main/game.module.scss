@@ -12,14 +12,12 @@
   background-repeat: repeat;
   .wallHorizontal {
     position: absolute;
-    height: 20px;
     background-image: url("../../../public/assets/wall.jpg");
     background-size: contain;
     background-repeat: repeat;
   }
   .wallVertical {
     position: absolute;
-    width: 20px;
     background-image: url("../../../public/assets/wall.jpg");
     background-size: contain;
     background-repeat: repeat;
@@ -27,10 +25,12 @@
   .board_game_container {
     position: relative;
     .board_game {
+      z-index: 10;
+      position: relative;
+      background-color: red;
       background-image: url("../../../public/assets/boardGame.png");
       background-size: contain;
       background-repeat: repeat;
-      // box-shadow: 0 0 1px 20px black;
     }
   }
 }

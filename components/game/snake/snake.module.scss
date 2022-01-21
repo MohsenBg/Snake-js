@@ -1,5 +1,9 @@
 .container {
+  position: absolute;
   .snake_head {
-    background-color: red;
+    position: absolute;
+    background-image: url("../../../public/assets/head.png");
+    background-size: cover;
+    box-shadow: 0 0 2px 2px rgba(128, 128, 128, 0.3);
   }
 }

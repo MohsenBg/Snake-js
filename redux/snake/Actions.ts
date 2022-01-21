@@ -9,12 +9,20 @@ interface direction {
   payload: String;
 }
 
-interface HeadPosition {
-  type: ActionType.HEAD_POSITION;
-  payload: position;
+interface HeadPositionX {
+  type: ActionType.HEAD_POSITION_X;
+  payload: number;
+}
+interface HeadPositionY {
+  type: ActionType.HEAD_POSITION_Y;
+  payload: number;
 }
 interface BodyPosition {
   type: ActionType.BODY_POSITION;
   payload: Array<position>;
 }
-export type Snake_Actions = direction | BodyPosition | HeadPosition;
+export type Snake_Actions =
+  | direction
+  | BodyPosition
+  | HeadPositionX
+  | HeadPositionY;

@@ -9,7 +9,13 @@ export const boardSize = () => {
       if (smaller % 20 === 0) break;
       smaller--;
     }
-    return smaller - 40;
+    let wall = 2 * (smaller / MovementSize);
+    while (true) {
+      if (wall % 20 === 0) break;
+      wall--;
+    }
+
+    return smaller - 2 * wall;
   } else {
     return 400;
   }

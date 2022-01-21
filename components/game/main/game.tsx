@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Controller from "../other/key&Touch/controller";
-import { boardSize } from "../other/responsive/handlerSize";
+import { boardSize, snakeSize } from "../other/responsive/handlerSize";
+import Food from "../other/rolls/food/foods";
+import Move from "../other/rolls/move/move";
 import Snake from "../snake/snake";
 import styles from "./game.module.scss";
 
 const Game = () => {
   const [board_game_size, setBoard_game_size] = useState(0);
+  const [wallSize, setWallSize] = useState(0);
+
   useEffect(() => {
     const changeWindowSize = () => {
       setBoard_game_size(boardSize());
+      setWallSize(snakeSize());
     };
     changeWindowSize();
     window.addEventListener("resize", changeWindowSize);
@@ -23,39 +28,46 @@ const Game = () => {
             height: `${board_game_size}px`,
           }}
         >
-          <Controller />
           <Snake />
+          <Controller />
+          <Move />
+          <Food />
         </div>
 
         <>
           <div
             className={styles.wallHorizontal}
             style={{
-              top: "-20px",
-              width: `${board_game_size}px`,
+              right: "0",
+              top: `-${wallSize}px`,
+              height: `${wallSize}px`,
+              width: `${board_game_size + wallSize}px`,
             }}
           />
           <div
             className={styles.wallVertical}
             style={{
-              top: "-20px",
-              left: "-20px",
-              height: `${board_game_size + 40}px `,
+              top: `0`,
+              width: `${wallSize}px`,
+              height: `${board_game_size + wallSize}px`,
+              left: `-${wallSize}px`,
             }}
           />
           <div
             className={styles.wallVertical}
             style={{
-              top: "-20px",
-              right: "-20px",
-              height: `${board_game_size + 40}px`,
+              top: `-${wallSize}px`,
+              width: `${wallSize}px`,
+              height: `${board_game_size + wallSize}px`,
+              right: `-${wallSize}px`,
             }}
           />
           <div
             className={styles.wallHorizontal}
             style={{
-              bottom: "-20px",
-              width: `${board_game_size}px`,
+              bottom: `-${wallSize}px`,
+              height: `${wallSize}px`,
+              width: `${board_game_size + wallSize}px`,
             }}
           />
         </>
