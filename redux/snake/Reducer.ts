@@ -7,6 +7,7 @@ interface coord {
 }
 
 const initialState = {
+  score: 0,
   len: 1,
   direction: "none",
   headPosition: {
@@ -21,9 +22,9 @@ const initialState = {
   ],
 };
 
-const body = (headPos: coord) => {
-  let newBody = initialState.body;
-  if (initialState.len === initialState.body.length) newBody.shift();
+const body = (headPos: coord, len: number, bodySnake: Array<coord>) => {
+  let newBody = bodySnake;
+  if (len === bodySnake.length) newBody.shift();
   newBody.push(headPos);
   return newBody;
 };
@@ -48,7 +49,7 @@ export const ReducerSnake = (state = initialState, actions: Actions) => {
       return {
         ...state,
         headPosition: newPositionX,
-        body: body(newPositionX),
+        body: body(newPositionX, state.len, state.body),
       };
 
     case ActionType.HEAD_POSITION_Y:
@@ -59,10 +60,30 @@ export const ReducerSnake = (state = initialState, actions: Actions) => {
       return {
         ...state,
         headPosition: newPositionY,
-        body: body(newPositionY),
+        body: body(newPositionY, state.len, state.body),
       };
-    case ActionType.BODY_POSITION:
-      return { ...state, body: actions.payload };
+
+    case ActionType.RESET_GAME:
+      return {
+        score: 0,
+        len: 1,
+        direction: "none",
+        headPosition: {
+          x: 0,
+          y: 0,
+        },
+        body: [
+          {
+            x: 0,
+            y: 0,
+          },
+        ],
+      };
+
+    case ActionType.LENGTH:
+      let newLen = actions.payload + state.len;
+      return { ...state, len: newLen, score: (newLen - 1) * 10 };
+
     default:
       return state;
   }

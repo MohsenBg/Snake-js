@@ -17,12 +17,17 @@ interface HeadPositionY {
   type: ActionType.HEAD_POSITION_Y;
   payload: number;
 }
-interface BodyPosition {
-  type: ActionType.BODY_POSITION;
-  payload: Array<position>;
+interface restGame {
+  type: ActionType.RESET_GAME;
 }
+interface length {
+  type: ActionType.LENGTH;
+  payload: number;
+}
+
 export type Snake_Actions =
   | direction
-  | BodyPosition
+  | restGame
   | HeadPositionX
-  | HeadPositionY;
+  | HeadPositionY
+  | length;

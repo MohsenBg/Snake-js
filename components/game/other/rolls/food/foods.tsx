@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Snake_ActionType } from "../../../../../redux/snake/ActionType";
 import { initialState } from "../../../../../redux/store";
 import { snakeSize } from "../../responsive/handlerSize";
 import styles from "./food.module.scss";
 const Food = () => {
   const [foodSize, setFoodSize] = useState(0);
-  const [foodCoordinate, setFoodCoordinate] = useState({ x: 0, y: 0 });
+  const [foodCoordinate, setFoodCoordinate] = useState({
+    x: -25000,
+    y: -25000,
+  });
   const headPosition = useSelector(
     (state: typeof initialState) =>
       //@ts-ignore
@@ -30,12 +34,15 @@ const Food = () => {
     generateFood();
   }, [foodSize]);
 
+  const dispatch = useDispatch();
   useEffect(() => {
     if (
       headPosition.x === foodCoordinate.x &&
       headPosition.y === foodCoordinate.y
-    )
+    ) {
       generateFood();
+      dispatch({ type: Snake_ActionType.LENGTH, payload: 1 });
+    }
   }, [headPosition]);
 
   return (

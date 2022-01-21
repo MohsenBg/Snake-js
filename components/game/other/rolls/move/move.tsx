@@ -12,6 +12,7 @@ const Move = () => {
   );
 
   const dispatch = useDispatch();
+
   const DispatchHeadPosition = (isX: boolean, pos: number) => {
     if (isX) {
       dispatch({ type: Snake_ActionType.HEAD_POSITION_X, payload: pos });
@@ -19,6 +20,7 @@ const Move = () => {
       dispatch({ type: Snake_ActionType.HEAD_POSITION_Y, payload: pos });
     }
   };
+
   useEffect(() => {
     if (direction !== "none") {
       const interval = setInterval(() => move_snake(), 100);
@@ -28,6 +30,7 @@ const Move = () => {
     }
   }, [direction]);
 
+  //center
   useEffect(() => {
     DispatchHeadPosition(true, boardSize() / 2);
     DispatchHeadPosition(false, boardSize() / 2);

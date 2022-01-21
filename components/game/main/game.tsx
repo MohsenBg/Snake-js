@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { initialState } from "../../../redux/store";
 import Controller from "../other/key&Touch/controller";
 import { boardSize, snakeSize } from "../other/responsive/handlerSize";
 import Food from "../other/rolls/food/foods";
+import GameOver from "../other/rolls/gameOver/gameOver";
 import Move from "../other/rolls/move/move";
 import Snake from "../snake/snake";
 import styles from "./game.module.scss";
@@ -9,6 +12,12 @@ import styles from "./game.module.scss";
 const Game = () => {
   const [board_game_size, setBoard_game_size] = useState(0);
   const [wallSize, setWallSize] = useState(0);
+
+  const score = useSelector(
+    (state: typeof initialState) =>
+      //@ts-ignore
+      state.snake.score
+  );
 
   useEffect(() => {
     const changeWindowSize = () => {
@@ -18,8 +27,10 @@ const Game = () => {
     changeWindowSize();
     window.addEventListener("resize", changeWindowSize);
   }, []);
+
   return (
     <div className={styles.container}>
+      <div className={styles.score}>score:{score}</div>
       <div className={styles.board_game_container}>
         <div
           className={styles.board_game}
@@ -32,6 +43,7 @@ const Game = () => {
           <Controller />
           <Move />
           <Food />
+          <GameOver />
         </div>
 
         <>
