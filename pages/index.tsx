@@ -1,8 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import axios from "axios";
-import useSWR from "swr";
+
 import Game from "../components/game/main/game";
 
 const Home: NextPage = () => {
