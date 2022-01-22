@@ -3,5 +3,6 @@ export enum Snake_ActionType {
   HEAD_POSITION_X = "HEAD_POSITION_X",
   HEAD_POSITION_Y = "HEAD_POSITION_Y",
   LENGTH = "LENGTH",
+  GAME_OVER = "GAME_OVER",
   RESET_GAME = "RESET_GAME",
 }

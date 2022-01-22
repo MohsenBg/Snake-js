@@ -6,7 +6,6 @@ const Menu = ({ handelPlay }: any) => {
     /* View in fullscreen */
   }, []);
   const openFullscreen = () => {
-    handelPlay();
     let elem = document.documentElement;
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
@@ -25,6 +24,7 @@ const Menu = ({ handelPlay }: any) => {
       //@ts-ignore
       elem.msRequestFullscreen();
     }
+    handelPlay();
   };
   const contactMe = () => {
     window.open("https://github.com/MohsenBg", "_blank");

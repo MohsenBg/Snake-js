@@ -7,6 +7,7 @@ interface coord {
 }
 
 const initialState = {
+  gameOver: false,
   score: 0,
   len: 1,
   direction: "none",
@@ -32,6 +33,7 @@ const body = (headPos: coord, len: number, bodySnake: Array<coord>) => {
 export const ReducerSnake = (state = initialState, actions: Actions) => {
   switch (actions.type) {
     case ActionType.DIRECTION:
+      if (state.gameOver) return { ...state };
       if (state.direction === "up" && actions.payload === "down")
         return { ...state };
       if (state.direction === "down" && actions.payload === "up")
@@ -65,6 +67,7 @@ export const ReducerSnake = (state = initialState, actions: Actions) => {
 
     case ActionType.RESET_GAME:
       return {
+        gameOver: false,
         score: 0,
         len: 1,
         direction: "none",
@@ -83,6 +86,8 @@ export const ReducerSnake = (state = initialState, actions: Actions) => {
     case ActionType.LENGTH:
       let newLen = actions.payload + state.len;
       return { ...state, len: newLen, score: (newLen - 1) * 10 };
+    case ActionType.GAME_OVER:
+      return { ...state, gameOver: true, direction: "none" };
 
     default:
       return state;

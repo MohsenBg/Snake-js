@@ -17,6 +17,9 @@ interface HeadPositionY {
   type: ActionType.HEAD_POSITION_Y;
   payload: number;
 }
+interface gameOver {
+  type: ActionType.GAME_OVER;
+}
 interface restGame {
   type: ActionType.RESET_GAME;
 }
@@ -30,4 +33,5 @@ export type Snake_Actions =
   | restGame
   | HeadPositionX
   | HeadPositionY
-  | length;
+  | length
+  | gameOver;

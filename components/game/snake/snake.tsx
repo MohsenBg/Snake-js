@@ -31,7 +31,9 @@ const Snake = () => {
 
   useEffect(() => {
     const changeWindowSize = () => {
-      setSnake_size(snakeSize);
+      if (direction === "none") {
+        setSnake_size(snakeSize);
+      }
     };
     changeWindowSize();
     window.addEventListener("resize", changeWindowSize);

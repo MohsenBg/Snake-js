@@ -19,10 +19,18 @@ const Game = () => {
       state.snake.score
   );
 
+  const direction = useSelector(
+    (state: typeof initialState) =>
+      //@ts-ignore
+      state.snake.direction
+  );
+
   useEffect(() => {
     const changeWindowSize = () => {
-      setBoard_game_size(boardSize());
-      setWallSize(snakeSize());
+      if (direction === "none") {
+        setBoard_game_size(boardSize());
+        setWallSize(snakeSize());
+      }
     };
     changeWindowSize();
     window.addEventListener("resize", changeWindowSize);

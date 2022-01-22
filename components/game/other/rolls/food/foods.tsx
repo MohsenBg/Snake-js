@@ -15,10 +15,18 @@ const Food = () => {
       //@ts-ignore
       state.snake.headPosition
   );
+  const direction = useSelector(
+    (state: typeof initialState) =>
+      //@ts-ignore
+      state.snake.direction
+  );
 
   useEffect(() => {
     const setSize = () => {
-      setFoodSize(snakeSize());
+      if (direction === "none") {
+        setFoodSize(snakeSize());
+        generateFood();
+      }
     };
     setSize();
     window.addEventListener("resize", setSize);

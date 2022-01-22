@@ -38,6 +38,7 @@
   .board_game_container {
     position: relative;
     .board_game {
+      overflow: hidden;
       z-index: 10;
       position: relative;
       background-color: red;

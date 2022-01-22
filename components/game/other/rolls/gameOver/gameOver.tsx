@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Snake_ActionType } from "../../../../../redux/snake/ActionType";
 import { initialState } from "../../../../../redux/store";
 import { boardSize } from "../../responsive/handlerSize";
-
+import styles from "./gameOver.module.scss";
 const GameOver = () => {
+  const [gameOverStatus, setGameOverStatus] = useState(false);
   const score = useSelector(
     (state: typeof initialState) =>
       //@ts-ignore
@@ -52,14 +53,34 @@ const GameOver = () => {
       hit_wall = true;
     }
     if (hit_self || hit_wall) {
-      alert("game over your score is " + score);
-      dispatch({ type: Snake_ActionType.RESET_GAME });
-      DispatchHeadPosition(true, boardSize() / 2);
-      DispatchHeadPosition(false, boardSize() / 2);
+      setGameOverStatus(true);
+      dispatch({ type: Snake_ActionType.GAME_OVER });
     }
   }, [headPosition]);
 
-  return null;
+  const reset = () => {
+    dispatch({ type: Snake_ActionType.RESET_GAME });
+
+    DispatchHeadPosition(true, boardSize() / 2);
+    DispatchHeadPosition(false, boardSize() / 2);
+    setGameOverStatus(false);
+  };
+
+  return (
+    <>
+      {gameOverStatus ? (
+        <div className={styles.container}>
+          <div className={styles.background}>
+            <h3>game over</h3>
+            <div className={styles.text}>your score is {score}</div>
+            <div className={styles.btn} onClick={reset}>
+              try again
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
 };
 
 export default GameOver;
