@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { initialState } from "../../../redux/store";
 import { snakeSize } from "../other/responsive/handlerSize";
 import styles from "./snake.module.scss";
-
 interface coord {
   x: number;
   y: number;
@@ -29,6 +28,12 @@ const Snake = () => {
       state.snake.direction
   );
 
+  const speed = useSelector(
+    (state: typeof initialState) =>
+      //@ts-ignore
+      state.snake.speed
+  );
+
   useEffect(() => {
     const changeWindowSize = () => {
       if (direction === "none") {
@@ -42,6 +47,7 @@ const Snake = () => {
   return (
     <div className={styles.container}>
       <div
+        id="snake"
         className={styles.snake_head}
         style={{
           width: `${snake_size}px`,
@@ -54,6 +60,7 @@ const Snake = () => {
               : direction === "left"
               ? `translate(${headPosition.x}px,${headPosition.y}px) rotate(270deg)`
               : `translate(${headPosition.x}px,${headPosition.y}px)`,
+          //transition: `${speed}ms`,
         }}
       />
 
@@ -73,6 +80,7 @@ const Snake = () => {
                   : direction === "left"
                   ? `translate(${item.x}px,${item.y}px) rotate(270deg)`
                   : `translate(${item.x}px,${item.y}px)`,
+              //  transition: `${speed}ms`,
             }}
           />
         );

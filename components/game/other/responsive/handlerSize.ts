@@ -6,12 +6,12 @@ export const boardSize = () => {
     const height = Math.floor(window.innerHeight);
     let smaller = width >= height ? height : width;
     while (true) {
-      if (smaller % 20 === 0) break;
+      if (smaller % MovementSize === 0) break;
       smaller--;
     }
     let wall = 2 * (smaller / MovementSize);
     while (true) {
-      if (wall % 20 === 0) break;
+      if (wall % MovementSize === 0) break;
       wall--;
     }
 

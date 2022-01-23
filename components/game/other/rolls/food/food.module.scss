@@ -2,5 +2,24 @@
   .food {
     background-image: url(../../../../../public/assets/food.png);
     background-size: cover;
+    animation: showFood 2s;
+  }
+}
+
+@keyframes showFood {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }

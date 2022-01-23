@@ -1,10 +1,22 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Snake_ActionType } from "../../../../redux/snake/ActionType";
+import { initialState } from "../../../../redux/store";
 
 let startTouch = { x: 0, y: 0 };
 let endTouch = { x: 0, y: 0 };
 const Controller = () => {
+  const speed = useSelector(
+    (state: typeof initialState) =>
+      //@ts-ignore
+      state.snake.speed
+  );
+
+  function daleyLoop(ms: number) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
   //* store movement of coordinate touch
 
   useEffect(() => {
@@ -50,7 +62,7 @@ const Controller = () => {
   };
   //* handleKeyPress
 
-  const handleOnPressKey = (e: KeyboardEvent) => {
+  const handleOnPressKey = async (e: KeyboardEvent) => {
     //!KEY LIST
     /* 
     W , ArrowUp     =>>   up
@@ -58,6 +70,8 @@ const Controller = () => {
     S , ArrowDown   =>>   down
     A , ArrowLeft   =>>   left
     */
+
+    await daleyLoop(speed);
     switch (e.code) {
       case "KeyW":
       case "ArrowUp":

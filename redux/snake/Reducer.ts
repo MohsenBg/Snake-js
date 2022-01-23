@@ -7,6 +7,7 @@ interface coord {
 }
 
 const initialState = {
+  speed: 200,
   gameOver: false,
   score: 0,
   len: 1,
@@ -67,6 +68,7 @@ export const ReducerSnake = (state = initialState, actions: Actions) => {
 
     case ActionType.RESET_GAME:
       return {
+        speed: 200,
         gameOver: false,
         score: 0,
         len: 1,

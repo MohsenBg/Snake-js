@@ -5,6 +5,17 @@ import { initialState } from "../../../../../redux/store";
 import { boardSize, snakeSize } from "../../responsive/handlerSize";
 
 const Move = () => {
+  const speed = useSelector(
+    (state: typeof initialState) =>
+      //@ts-ignore
+      state.snake.speed
+  );
+  const len = useSelector(
+    (state: typeof initialState) =>
+      //@ts-ignore
+      state.snake.len
+  );
+
   const direction = useSelector(
     (state: typeof initialState) =>
       //@ts-ignore
@@ -22,8 +33,9 @@ const Move = () => {
   };
 
   useEffect(() => {
+    move_snake();
     if (direction !== "none") {
-      const interval = setInterval(() => move_snake(), 100);
+      const interval = setInterval(() => move_snake(), speed);
       return () => {
         clearInterval(interval);
       };
@@ -32,28 +44,34 @@ const Move = () => {
 
   //center
   useEffect(() => {
-    DispatchHeadPosition(true, boardSize() / 2);
-    DispatchHeadPosition(false, boardSize() / 2);
+    const center = () => {
+      if (len === 1 && direction === "none") {
+        DispatchHeadPosition(true, boardSize() / 2);
+        DispatchHeadPosition(false, boardSize() / 2);
+      }
+    };
+    window.addEventListener("resize", center);
   }, []);
 
   const move_snake = () => {
-    let snake_size = snakeSize();
-
-    switch (direction) {
-      case "up":
-        DispatchHeadPosition(false, -snake_size);
-        break;
-      case "right":
-        DispatchHeadPosition(true, snake_size);
-        break;
-      case "down":
-        DispatchHeadPosition(false, snake_size);
-        break;
-      case "left":
-        DispatchHeadPosition(true, -snake_size);
-        break;
-      default:
-        break;
+    if (direction !== "none") {
+      let snake_size = snakeSize();
+      switch (direction) {
+        case "up":
+          DispatchHeadPosition(false, -snake_size);
+          break;
+        case "right":
+          DispatchHeadPosition(true, snake_size);
+          break;
+        case "down":
+          DispatchHeadPosition(false, snake_size);
+          break;
+        case "left":
+          DispatchHeadPosition(true, -snake_size);
+          break;
+        default:
+          break;
+      }
     }
   };
 
