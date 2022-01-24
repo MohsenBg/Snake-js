@@ -36,7 +36,11 @@ const HighScore = () => {
     }
   }, [gameOver]);
 
-  return <span>{hightScore}</span>;
+  return (
+    <span style={{ color: "gold", textShadow: "1px 1px 2px red" }}>
+      {hightScore}
+    </span>
+  );
 };
 
 export default HighScore;

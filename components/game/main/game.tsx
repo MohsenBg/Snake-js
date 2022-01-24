@@ -42,7 +42,12 @@ const Game = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.score}>score:{score}</div>
+      <div className={styles.score}>
+        score:
+        <span style={{ color: "aqua", textShadow: "1px 1px 2px red" }}>
+          {score}
+        </span>
+      </div>
       <div className={styles.highScore}>
         highScore:
         <HighScore />
