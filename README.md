@@ -3,14 +3,16 @@
 it's game on web you can eat , grow and increase your hight score
 <br/>
 <br/>
-![snakeGame](./public/assets/readme/snakeGame.PNG)
+![snakeGame](https://i.ibb.co/6mwnWHD/snake-Game.png)
 <br/>
 <br/>
-<a href="https://snake-js-mohsenbg.vercel.app/">
+
 <button>
+<a href="https://snake-js-mohsenbg.vercel.app/">
 Play now
-</button>
 </a>
+</button>
+
 
 </br>
 
@@ -23,15 +25,15 @@ Play now
 ### KEY
 
 <br/>
-
-$~~~~$ <kbd>W</kbd> $~~~~~~~~~~~~~~~~~~~~$ <kbd>↑</kbd> <br/>
-<kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> $~~~$ or $~~~$ <kbd>←</kbd> <kbd>↓</kbd> <kbd>→</kbd>
-
+<div>
+&nbsp &nbsp &nbsp<kbd>W</kbd>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <kbd>↑</kbd> <br/>
+<kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> &nbsp &nbsp  or &nbsp &nbsp <kbd>←</kbd> <kbd>↓</kbd> <kbd>→</kbd>
+</div>
 <br/>
 
 ### TOUCH
 
-![Touch](./public/assets/readme/touch.png)
+![Touch](https://i.ibb.co/1rMDzq9/touch.png)
 
 # Tec
 
