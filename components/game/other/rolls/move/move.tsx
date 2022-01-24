@@ -62,7 +62,6 @@ const Move = () => {
 
   useEffect(() => {
     if (direction !== "none") {
-      move_snake();
       const interval = setInterval(() => move_snake(), speed);
       return () => {
         clearInterval(interval);
