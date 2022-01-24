@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Snake_ActionType } from "../../../redux/snake/ActionType";
+import { useSelector } from "react-redux";
 import { initialState } from "../../../redux/store";
-import { boardSize, snakeSize } from "../other/responsive/handlerSize";
+import { snakeSize } from "../other/responsive/handlerSize";
 import styles from "./snake.module.scss";
 interface coord {
   x: number;
