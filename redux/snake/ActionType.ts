@@ -5,4 +5,5 @@ export enum Snake_ActionType {
   LENGTH = "LENGTH",
   GAME_OVER = "GAME_OVER",
   RESET_GAME = "RESET_GAME",
+  CENTER = "CENTER",
 }

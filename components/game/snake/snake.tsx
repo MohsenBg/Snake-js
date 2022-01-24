@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Snake_ActionType } from "../../../redux/snake/ActionType";
 import { initialState } from "../../../redux/store";
-import { snakeSize } from "../other/responsive/handlerSize";
+import { boardSize, snakeSize } from "../other/responsive/handlerSize";
 import styles from "./snake.module.scss";
 interface coord {
   x: number;
@@ -16,6 +17,7 @@ const Snake = () => {
       //@ts-ignore
       state.snake.headPosition
   );
+
   const bodyPosition = useSelector(
     (state: typeof initialState) =>
       //@ts-ignore
@@ -34,6 +36,7 @@ const Snake = () => {
       state.snake.speed
   );
 
+  //!change Size Snake event resize and center it
   useEffect(() => {
     const changeWindowSize = () => {
       if (direction === "none") {
@@ -47,42 +50,60 @@ const Snake = () => {
   return (
     <div className={styles.container}>
       <div
-        id="snake"
         className={styles.snake_head}
         style={{
           width: `${snake_size}px`,
           height: `${snake_size}px`,
-          transform:
-            direction === "right"
-              ? `translate(${headPosition.x}px,${headPosition.y}px) rotate(90deg)`
-              : direction === "down"
-              ? `translate(${headPosition.x}px,${headPosition.y}px) rotate(180deg)`
-              : direction === "left"
-              ? `translate(${headPosition.x}px,${headPosition.y}px) rotate(270deg)`
-              : `translate(${headPosition.x}px,${headPosition.y}px)`,
-          //transition: `${speed}ms`,
+          transform: `translate(${headPosition.x}px,${headPosition.y}px)`,
+          transition: `${speed}ms`,
         }}
-      />
+      >
+        <div
+          id="snake"
+          className={styles.snake_head}
+          style={{
+            width: `${snake_size}px`,
+            height: `${snake_size}px`,
+            transform:
+              direction === "right"
+                ? ` rotate(90deg)`
+                : direction === "down"
+                ? ` rotate(180deg)`
+                : direction === "left"
+                ? ` rotate(270deg)`
+                : ``,
+          }}
+        />
+      </div>
 
       {bodyPosition.slice(0, bodyPosition.length - 1).map((item: coord) => {
         return (
           <div
-            key={Math.random()}
             className={styles.body}
+            key={Math.random()}
             style={{
               width: `${snake_size}px`,
               height: `${snake_size}px`,
-              transform:
-                direction === "right"
-                  ? `translate(${item.x}px,${item.y}px) rotate(90deg)`
-                  : direction === "down"
-                  ? `translate(${item.x}px,${item.y}px) rotate(180deg)`
-                  : direction === "left"
-                  ? `translate(${item.x}px,${item.y}px) rotate(270deg)`
-                  : `translate(${item.x}px,${item.y}px)`,
-              //  transition: `${speed}ms`,
+              transform: `translate(${item.x}px,${item.y}px)`,
             }}
-          />
+          >
+            <div
+              className={styles.body}
+              style={{
+                width: `${snake_size}px`,
+                height: `${snake_size}px`,
+                transform:
+                  direction === "right"
+                    ? ` rotate(90deg)`
+                    : direction === "down"
+                    ? ` rotate(180deg)`
+                    : direction === "left"
+                    ? ` rotate(270deg)`
+                    : ``,
+                transition: `${speed}ms`,
+              }}
+            />
+          </div>
         );
       })}
     </div>

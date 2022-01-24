@@ -22,36 +22,11 @@ const Move = () => {
       state.snake.direction
   );
 
-  const dispatch = useDispatch();
-
-  const DispatchHeadPosition = (isX: boolean, pos: number) => {
-    if (isX) {
-      dispatch({ type: Snake_ActionType.HEAD_POSITION_X, payload: pos });
-    } else {
-      dispatch({ type: Snake_ActionType.HEAD_POSITION_Y, payload: pos });
-    }
-  };
-
-  useEffect(() => {
-    move_snake();
-    if (direction !== "none") {
-      const interval = setInterval(() => move_snake(), speed);
-      return () => {
-        clearInterval(interval);
-      };
-    }
-  }, [direction]);
-
-  //center
-  useEffect(() => {
-    const center = () => {
-      if (len === 1 && direction === "none") {
-        DispatchHeadPosition(true, boardSize() / 2);
-        DispatchHeadPosition(false, boardSize() / 2);
-      }
-    };
-    window.addEventListener("resize", center);
-  }, []);
+  const headPosition = useSelector(
+    (state: typeof initialState) =>
+      //@ts-ignore
+      state.snake.headPosition
+  );
 
   const move_snake = () => {
     if (direction !== "none") {
@@ -74,6 +49,37 @@ const Move = () => {
       }
     }
   };
+
+  const dispatch = useDispatch();
+
+  const DispatchHeadPosition = (isX: boolean, pos: number) => {
+    if (isX) {
+      dispatch({ type: Snake_ActionType.HEAD_POSITION_X, payload: pos });
+    } else {
+      dispatch({ type: Snake_ActionType.HEAD_POSITION_Y, payload: pos });
+    }
+  };
+
+  useEffect(() => {
+    if (direction !== "none") {
+      move_snake();
+      const interval = setInterval(() => move_snake(), speed);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [direction]);
+
+  //center
+  useEffect(() => {
+    const center = () => {
+      if (len === 1 && direction === "none") {
+        DispatchHeadPosition(true, boardSize() / 2);
+        DispatchHeadPosition(false, boardSize() / 2);
+      }
+    };
+    window.addEventListener("resize", center);
+  }, []);
 
   return null;
 };

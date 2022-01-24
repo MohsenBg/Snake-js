@@ -1,3 +1,4 @@
+import { boardSize } from "../../components/game/other/responsive/handlerSize";
 import { Snake_Actions as Actions } from "./Actions";
 import { Snake_ActionType as ActionType } from "./ActionType";
 
@@ -90,6 +91,14 @@ export const ReducerSnake = (state = initialState, actions: Actions) => {
       return { ...state, len: newLen, score: (newLen - 1) * 10 };
     case ActionType.GAME_OVER:
       return { ...state, gameOver: true, direction: "none" };
+    case ActionType.CENTER:
+      return {
+        ...state,
+        headPosition: {
+          x: actions.payload,
+          y: actions.payload,
+        },
+      };
 
     default:
       return state;

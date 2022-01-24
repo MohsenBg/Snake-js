@@ -6,6 +6,7 @@ import { boardSize } from "../../responsive/handlerSize";
 import styles from "./gameOver.module.scss";
 const GameOver = () => {
   const [gameOverStatus, setGameOverStatus] = useState(false);
+
   const score = useSelector(
     (state: typeof initialState) =>
       //@ts-ignore
@@ -18,21 +19,21 @@ const GameOver = () => {
       state.snake.body
   );
 
+  const direction = useSelector(
+    (state: typeof initialState) =>
+      //@ts-ignore
+      state.snake.direction
+  );
+
   const headPosition = useSelector(
     (state: typeof initialState) =>
       //@ts-ignore
       state.snake.headPosition
   );
 
-  const DispatchHeadPosition = (isX: boolean, pos: number) => {
-    if (isX) {
-      dispatch({ type: Snake_ActionType.HEAD_POSITION_X, payload: pos });
-    } else {
-      dispatch({ type: Snake_ActionType.HEAD_POSITION_Y, payload: pos });
-    }
-  };
-
   const dispatch = useDispatch();
+
+  //! check game over
   useEffect(() => {
     let hit_self = false;
     let hit_wall = false;
@@ -52,17 +53,16 @@ const GameOver = () => {
     ) {
       hit_wall = true;
     }
-    if (hit_self || hit_wall) {
+    if (hit_self || (hit_wall && direction !== "none")) {
       setGameOverStatus(true);
       dispatch({ type: Snake_ActionType.GAME_OVER });
     }
   }, [headPosition]);
 
+  //! reset game
   const reset = () => {
     dispatch({ type: Snake_ActionType.RESET_GAME });
-
-    DispatchHeadPosition(true, boardSize() / 2);
-    DispatchHeadPosition(false, boardSize() / 2);
+    dispatch({ type: Snake_ActionType.CENTER,payload:boardSize()/2 });
     setGameOverStatus(false);
   };
 

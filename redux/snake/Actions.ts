@@ -27,6 +27,10 @@ interface length {
   type: ActionType.LENGTH;
   payload: number;
 }
+interface center {
+  type: ActionType.CENTER;
+  payload: number;
+}
 
 export type Snake_Actions =
   | direction
@@ -34,4 +38,5 @@ export type Snake_Actions =
   | HeadPositionX
   | HeadPositionY
   | length
-  | gameOver;
+  | gameOver
+  | center;

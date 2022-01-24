@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Snake_ActionType } from "../../../redux/snake/ActionType";
 import { initialState } from "../../../redux/store";
 import Controller from "../other/key&Touch/controller";
 import { boardSize, snakeSize } from "../other/responsive/handlerSize";
 import Food from "../other/rolls/food/foods";
 import GameOver from "../other/rolls/gameOver/gameOver";
+import HighScore from "../other/rolls/highScore/highScore";
 import Move from "../other/rolls/move/move";
 import Snake from "../snake/snake";
 import styles from "./game.module.scss";
@@ -24,12 +26,14 @@ const Game = () => {
       //@ts-ignore
       state.snake.direction
   );
-
+  //! set Size Responsive
+  const dispatch = useDispatch();
   useEffect(() => {
     const changeWindowSize = () => {
       if (direction === "none") {
         setBoard_game_size(boardSize());
         setWallSize(snakeSize());
+        dispatch({ type: Snake_ActionType.CENTER, payload: boardSize() / 2 });
       }
     };
     changeWindowSize();
@@ -39,6 +43,11 @@ const Game = () => {
   return (
     <div className={styles.container}>
       <div className={styles.score}>score:{score}</div>
+      <div className={styles.highScore}>
+        highScore:
+        <HighScore />
+      </div>
+
       <div className={styles.board_game_container}>
         <div
           className={styles.board_game}
